@@ -1,0 +1,101 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Task at Hand</h4>
+                <div class="row m-t-20">
+                    <!-- Column -->
+                    <div class="col-md-6 col-lg-6 col-xlg-3">
+                        <div class="card card-hover">
+                            <div class="box {{bg_info}} text-center">
+                                <h1 class="font-light text-white">{{current_task}}</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                    <div class="col-md-6 col-lg-6 col-xlg-3">
+                        <button type='button' class='btn btn-warning' [style.display]="visible_start ? 'block' : 'none'" (click)="startTimer($event)">Start</button>
+                        <button type='button' class='btn btn-warning' [style.display]="visible_stop ? 'block' : 'none'">Stop</button>
+                        <button type='button' class='btn btn-success' [style.display]="visible_complete ? 'block' : 'none'">Complete</button>
+                    </div>
+                        
+                    <!-- <div class="col-md-6 col-lg-3 col-xlg-3">
+                        <div class="card card-hover">
+                            <div class="box bg-danger text-center">
+                                <h1 class="font-light text-white">{{in_queue_tasks}}</h1>
+                                <h6 class="text-white">In Queue & Assigned</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3 col-xlg-3">
+                        <div class="card card-hover">
+                            <div class="box bg-warning text-center">
+                                <h1 class="font-light text-white">{{in_process_tasks}}</h1>
+                                <h6 class="text-white">In Process</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3 col-xlg-3">
+                        <div class="card card-hover">
+                            <div class="box bg-success text-center">
+                                <h1 class="font-light text-white">{{completed_tasks}}</h1>
+                                <h6 class="text-white">Complete & N/A</h6>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Task Information</h4>
+                <div class="row m-t-20">
+                    <!-- Column -->
+                    <div class="col-md-6 col-lg-6 col-xlg-3">
+                        <div class="card card-hover">
+                            <h5 class="text-black">Status:</h5> <span [innerHTML]="task_status"></span>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                    <div class="col-md-6 col-lg-6 col-xlg-3">
+                        <div class="card card-hover">
+                            <h5 class="text-black">Description:</h5> <span [innerHTML]="task_description"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row m-t-20">
+                    <!-- Column -->
+                    <div class="col-md-6 col-lg-6 col-xlg-3">
+                        <div class="card card-hover">
+                            <h5 class="text-black">Estimated Time:</h5> <span [innerHTML]="estimated_time"></span>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                    <div class="col-md-6 col-lg-6 col-xlg-3">
+                        <div class="card card-hover">
+                            <h5 class="text-black">Assigned To:</h5> <span [innerHTML]="assigned_to"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row m-t-20">
+                    <!-- Column -->
+                    <div class="col-md-6 col-lg-6 col-xlg-3">
+                        <div class="card card-hover">
+                            <h5 class="text-black">Client:</h5> <span [innerHTML]="client"></span>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                    <div class="col-md-6 col-lg-6 col-xlg-3">
+                        <div class="card card-hover">
+                            <h5 class="text-black">Matter:</h5> <span [innerHTML]="matter_description"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

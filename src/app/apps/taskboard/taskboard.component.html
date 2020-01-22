@@ -1,0 +1,87 @@
+<div class="card">
+  <div class="card-body">
+    <div class="taskboard page-height">
+      <div class="taskboard-wrapper">
+        <div class="taskboard-list">
+          <h6 class="taskboard-header">Assigned</h6>
+          <div class="taskboard-cards" [dragula]='"task-group"'>
+              <span [innerHTML]="assigned_tasks"></span>
+            <div class="taskboard-task">
+              <div class="taskboard-task-title">Responsive bug</div>
+              <small class="card-text text-muted">Etiam porta sem malesuada magna mollis euismod.</small>
+            </div>
+            <div class="taskboard-task">
+              <div class="taskboard-task-title">Travel checklist</div>
+              <small class="card-text text-muted">Curabitur blandit tempus porttitor.</small>
+            </div>
+            <div class="taskboard-task task-status-success">
+              <div class="taskboard-task-title">Budget review</div>
+              <small class="card-text text-muted">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Integer posuere erat a ante venenatis dapibus
+                posuere velit aliquet.</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="taskboard-wrapper">
+        <div class="taskboard-list">
+          <h6 class="taskboard-header">In Process</h6>
+          <div class="taskboard-cards" [dragula]='"task-group"'>
+            <div class="taskboard-task">
+              <div class="taskboard-task-title">QOS Assessment</div>
+              <small class="card-text text-muted">Maecenas sed diam eget risus varius blandit sit amet non magna.</small>
+            </div>
+            <div class="taskboard-task task-status-warning">
+              <div class="taskboard-task-title">Schedule new tasks</div>
+              <small class="card-text text-muted">Sed posuere consectetur est at lobortis.</small>
+            </div>
+            <div class="taskboard-task">
+              <div class="taskboard-task-title">Add dashboard variants</div>
+              <small class="card-text text-muted">Nulla vitae elit libero, a pharetra augue.</small>
+            </div>
+            <div class="taskboard-task">
+              <div class="taskboard-task-title">Extended color scheme support</div>
+              <small class="card-text text-muted">Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</small>
+            </div>
+            <div class="taskboard-task task-status-info">
+              <div class="taskboard-task-title">Merge unit tests</div>
+              <small class="card-text text-muted">Maecenas sed diam eget risus varius blandit sit amet non magna.</small>
+            </div>
+            <div class="taskboard-task">
+              <div class="taskboard-task-title">Test final version</div>
+              <small class="card-text text-muted">Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="taskboard-wrapper">
+        <div class="taskboard-list">
+          <h6 class="taskboard-header">Complete</h6>
+          <div class="taskboard-cards" [dragula]='"task-group"'>
+            <div class="taskboard-task task-status-info">
+              <div class="taskboard-task-title">Store new files</div>
+              <small class="card-text text-muted">Sed posuere consectetur est at lobortis.</small>
+            </div>
+            <div class="taskboard-task">
+              <div class="taskboard-task-title">Build landing page</div>
+              <small class="card-text text-muted">Maecenas sed diam eget risus varius blandit sit amet non magna.</small>
+            </div>
+            <div class="taskboard-task">
+              <div class="taskboard-task-title">Setup basic layout</div>
+              <small class="card-text text-muted">Vestibulum id ligula porta felis euismod semper.</small>
+            </div>
+            <div class="taskboard-task">
+              <div class="taskboard-task-title">Graphical fixes</div>
+              <small class="card-text text-muted">Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</small>
+            </div>
+            <div class="taskboard-task task-status-warning">
+              <div class="taskboard-task-title">Email alerts</div>
+              <small class="card-text text-muted">Donec sed odio dui.</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
