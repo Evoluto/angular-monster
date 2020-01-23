@@ -40,4 +40,9 @@ export class ReportService {
     return this.http.get<Object[]>(url, this.httpOptions)
   }
 
+  getToken(): string {
+    
+    return "";
+  }
+
 }
