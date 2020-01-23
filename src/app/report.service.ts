@@ -10,7 +10,7 @@ export class ReportService {
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json',
-      'Authorization': 'Bearer  6Csvhk6QRwm3aVhL_jZoaCwl-UGhxtWZVSM0iXWr0ugqJ4QlAGMydEoVQhYeodCgGbZcM-ROTck7Y993eStVir1AiKYBJ0rnROKXhZmb8AHu-a0NQyXBuUh9rRqxGVFwcoisfTvotNEHz1jW_wcUed6r-IcPlNgKEJkQUIOQPOnRgp1gUPqTsdMoHvEFdOhlef5Nn-Zou7iRnVVRfNgvFM6TKMtj3pBt1Jsg2ugW5Fsbkd9bDoWOJ3qQOuGXVTjJQV6EIO-MO1jwBPTkhOcnMvsg76bsgf_LFoKkD_fZbgLPan8__P61QTAg8GQgal3Y'
+      'Authorization': 'Bearer  zBKp0StA8uWPJHGnS1bQ4EChLvR92iYwGhUB3jrm3mjki0pgGKMbhgBfGS32a1V8mgHVhhzvG6z1od9QZjkP0RfteDRhbGBvWxO3VBpUd7GnehN-VwrXSA4cQTdOP_ADCn1arFLkNS6GSltwTFS5kjYaJ5Bq4X14DX8Qd9XDghEIyXPXKXQxqXb4mxXDHcYbWBT9s9oUPjVaPZtjjyvf0-YQZrP2uE5RXuT14w7LAawLZBAs-om1LgWtRMaR0lD8bqmIWviDSeZongCELmNaH1Zlya1VHzPkxRw1HSzHM7_TA0A9571X1h6785qcm_YL'
     })
   }; 
 

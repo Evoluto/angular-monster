@@ -1,8 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {
-  CommonModule
-} from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
@@ -20,6 +18,7 @@ import { NavigationComponent } from './shared/header-navigation/navigation.compo
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { BreadcrumbComponent } from './shared/breadcrumb/breadcrumb.component';
 
+//import { GanttComponent } from "./apps/components/gantt.component";
 
 import { Approutes } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -45,6 +44,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     NavigationComponent,
     BreadcrumbComponent,
     SidebarComponent
+    //,GanttComponent
   ],
   imports: [
     CommonModule,

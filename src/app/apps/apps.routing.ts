@@ -8,6 +8,7 @@ import { TaskathandComponent } from './taskathand/taskathand.component';
 import { TaskdetailsComponent } from './taskdetails/taskdetails.component';
 import { BillinglistComponent } from './billinglist/billinglist.component';
 import { ProjectsComponent } from './projects/projects.component';
+import { GanttComponent } from './gantt/gantt.component';
 import { TaskboardComponent } from './taskboard/taskboard.component';
 import { FullcalendarComponent } from './fullcalendar/fullcalendar.component';
 
@@ -111,6 +112,17 @@ export const AppsRoutes: Routes = [
           urls: [
             { title: 'Dashboard', url: '/dashboard' },
             { title: 'Projects' }
+          ]
+        }
+      },
+      {
+        path: 'gantt',
+        component: GanttComponent,
+        data: {
+          title: 'Gantt',
+          urls: [
+            { title: 'Dashboard', url: '/dashboard' },
+            { title: 'Gantt' }
           ]
         }
       },

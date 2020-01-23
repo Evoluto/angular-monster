@@ -10,6 +10,14 @@ export const ROUTES: RouteInfo[] = [
         submenu: []
   },
   {
+    path: '/apps/gantt',
+        title: 'Gantt',
+        icon: 'mdi mdi-account-circle',
+        class: '',
+        extralink: false,
+        submenu: []
+  },
+  {
     path: '/tables/contacts1',
         title: 'Contacts',
         icon: 'mdi mdi-account-circle',
