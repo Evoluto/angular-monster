@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable({
@@ -12,7 +12,7 @@ export class ReportService {
       'Content-Type':  'application/json',
       'Authorization': 'Bearer  zBKp0StA8uWPJHGnS1bQ4EChLvR92iYwGhUB3jrm3mjki0pgGKMbhgBfGS32a1V8mgHVhhzvG6z1od9QZjkP0RfteDRhbGBvWxO3VBpUd7GnehN-VwrXSA4cQTdOP_ADCn1arFLkNS6GSltwTFS5kjYaJ5Bq4X14DX8Qd9XDghEIyXPXKXQxqXb4mxXDHcYbWBT9s9oUPjVaPZtjjyvf0-YQZrP2uE5RXuT14w7LAawLZBAs-om1LgWtRMaR0lD8bqmIWviDSeZongCELmNaH1Zlya1VHzPkxRw1HSzHM7_TA0A9571X1h6785qcm_YL'
     })
-  }; 
+  };
 
   constructor(private http: HttpClient) { 
   }
@@ -40,9 +40,19 @@ export class ReportService {
     return this.http.get<Object[]>(url, this.httpOptions)
   }
 
-  getToken(): string {
-    
-    return "";
+  getToken(username: string, password: string): Observable<Object> {
+    const url = 'https://ignatius.io/token';
+    let params = new HttpParams();
+    params = params.append('grant_type', 'password');
+    params = params.append('username', username);
+    params = params.append('password', password);
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/x-www-form-urlencoded'
+      })
+    };
+
+    return this.http.post(url, params, options);
   }
 
 }
