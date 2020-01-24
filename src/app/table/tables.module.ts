@@ -11,7 +11,6 @@ import { BasictableComponent } from './basic/basic.component';
 import { DarktableComponent } from './dark-basic/dark.component';
 import { ColortableComponent } from './color-table/color.component';
 import { TablesizeComponent } from './sizing/size.component';
-import { ContactsComponent } from './contacts/contacts.component';
 import { Contacts1Component } from './contacts1/contacts1.component';
 import { MattersComponent } from './matters/matters.component';
 import { ReportService } from '../report.service';
@@ -32,7 +31,6 @@ import { DataTablesModule } from 'angular-datatables';
     ColortableComponent,
     TablesizeComponent,
     SmarttableComponent,
-    ContactsComponent,
     Contacts1Component,
     MattersComponent
   ],

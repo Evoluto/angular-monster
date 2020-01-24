@@ -27,7 +27,6 @@ import { TaskdetailsComponent } from './taskdetails/taskdetails.component';
 import { TaskboardComponent } from './taskboard/taskboard.component';
 import { FullcalendarComponent } from './fullcalendar/fullcalendar.component';
 
-
 @NgModule({
   imports: [
     CommonModule,

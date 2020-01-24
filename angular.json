@@ -36,13 +36,9 @@
                             "node_modules/@swimlane/ngx-datatable/release/themes/material.css",
                             "node_modules/@swimlane/ngx-datatable/release/assets/icons.css",
                             "src/assets/vendor/css-chart.css",
-                            "src/assets/scss/style.scss",
-                            "node_modules/bootstrap/dist/css/bootstrap.min.css"
+                            "src/assets/scss/style.scss"
                         ],
-                        "scripts": [
-                            "node_modules/jquery/dist/jquery.js",
-                            "node_modules/datatables.net/js/jquery.dataTables.js"
-                        ]
+                        "scripts": []
                     },
                     "configurations": {
                         "production": {
