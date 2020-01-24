@@ -10,11 +10,23 @@ export class ReportService {
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json',
-      'Authorization': 'Bearer  zBKp0StA8uWPJHGnS1bQ4EChLvR92iYwGhUB3jrm3mjki0pgGKMbhgBfGS32a1V8mgHVhhzvG6z1od9QZjkP0RfteDRhbGBvWxO3VBpUd7GnehN-VwrXSA4cQTdOP_ADCn1arFLkNS6GSltwTFS5kjYaJ5Bq4X14DX8Qd9XDghEIyXPXKXQxqXb4mxXDHcYbWBT9s9oUPjVaPZtjjyvf0-YQZrP2uE5RXuT14w7LAawLZBAs-om1LgWtRMaR0lD8bqmIWviDSeZongCELmNaH1Zlya1VHzPkxRw1HSzHM7_TA0A9571X1h6785qcm_YL'
+      'Authorization': 'Bearer  kLDL5WP-3Qmz6tnPZy2tiMy9ch9KkWPhhuQLGrRrPvl2YIHdYdkeRwNG60I7lcwLjw61fxneS_9IbYBm1-uxLO04Q3TY0WWzIGxa9gRh-K4SeYFYZYHNjiGDlm4YK5m_weGgF_wwdORN7uN7E4oIgR55uAZHrRFKsOpXm3wrSxhYdvgQO1276UKXNbd0HK22aefL8lngtZ__NfAl5la1AeAxkUqE0DCLmX0I2qxEdnXtlsFiw3DplPj2BErHWVZxrTrvcpGVsIg6HPaL2kdyIHGoVMVPSwWcS-hTUVH_HZjQa3lY4h9gKLqBh5oNd570'
     })
   }; 
 
   constructor(private http: HttpClient) { 
+  }
+
+  getToken(query: Object): void {
+    // parameters = {
+    //         { "grant_type", "password" },
+    //         { "username", "super_admin@mail.com" },
+    //         { "password", "Miami123." }
+    //     };
+
+    // this.sent_query = JSON.stringify(query);
+    // const url = "https://ignatius.io/token";
+    // this.http.post(url, query, this.httpOptions).subscribe();
   }
 
   putData(query: Object): void {
@@ -38,11 +50,6 @@ export class ReportService {
   getDropdownValues(id: String): Observable<Object[]> {
     const url = "https://ignatius.io/api/field/getdropdownvalues?id=" + id;
     return this.http.get<Object[]>(url, this.httpOptions)
-  }
-
-  getToken(): string {
-    
-    return "";
   }
 
 }

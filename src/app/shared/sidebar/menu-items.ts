@@ -2,101 +2,102 @@ import { RouteInfo } from './sidebar.metadata';
 
 export const ROUTES: RouteInfo[] = [
   {
-    path: '/apps/projects',
-        title: 'Projects',
-        icon: 'mdi mdi-account-circle',
-        class: '',
-        extralink: false,
-        submenu: []
+    path: '',
+    title: 'Project Mgmt',
+    icon: 'mdi mdi-briefcase',
+    class: 'has-arrow',
+    extralink: false,
+    submenu: [
+      {
+        path: '/apps/projects',
+            title: 'Projects',
+            icon: 'mdi mdi-clipboard',
+            class: '',
+            extralink: false,
+            submenu: []
+      },
+      {
+        path: '/apps/gantt',
+            title: 'Gantt',
+            icon: 'mdi mdi-chart-timeline',
+            class: '',
+            extralink: false,
+            submenu: []
+      }
+    ]
   },
   {
-    path: '/apps/gantt',
-        title: 'Gantt',
-        icon: 'mdi mdi-account-circle',
-        class: '',
-        extralink: false,
-        submenu: []
-  },
-  {
-    path: '/tables/contacts1',
-        title: 'Contacts',
-        icon: 'mdi mdi-account-circle',
-        class: '',
-        extralink: false,
-        submenu: []
-  },
-  {
-    path: '/apps/billinglist',
-            title: 'Billing List',
+    path: '',
+    title: 'Task Mgmt',
+    icon: 'mdi mdi-alarm-plus',
+    class: 'has-arrow',
+    extralink: false,
+    submenu: [
+      {
+        path: '/tables/contacts1',
+            title: 'Contacts',
+            icon: 'mdi mdi-account-circle',
+            class: '',
+            extralink: false,
+            submenu: []
+      },
+      {
+        path: '/apps/billinglist',
+                title: 'Billing List',
+                icon: 'mdi mdi-coin',
+                class: '',
+                extralink: false,
+                submenu: []
+      },
+      {
+        path: '/forms/formbilling',
+            title: 'Billing Form',
             icon: 'mdi mdi-coin',
             class: '',
             extralink: false,
             submenu: []
-  },
-  {
-    path: '/forms/formbilling',
-        title: 'Billing Form',
-        icon: 'mdi mdi-coin',
+      },
+      {
+        path: '/tables/matters',
+            title: 'Matters',
+            icon: 'mdi mdi-layers',
+            class: '',
+            extralink: false,
+            submenu: []
+      },
+      {
+        path: '/apps/tasklist',
+        title: 'Task List',
+        icon: 'mdi mdi-book-multiple',
         class: '',
         extralink: false,
         submenu: []
-  },
-  // {
-  //   path: '',
-  //   title: 'Billing',
-  //   icon: 'mdi mdi-coin',
-  //   class: 'has-arrow',
-  //   extralink: false,
-  //   submenu: [
-  //     {
-  //       path: '/apps/billinglist',
-  //           title: 'Billing List',
-  //           icon: 'mdi mdi-coin',
-  //           class: '',
-  //           extralink: false,
-  //           submenu: []
-  //     },
-  //     {
-  //       path: '/forms/formbilling',
-  //           title: 'Billing Form',
-  //           icon: 'mdi mdi-coin',
-  //           class: '',
-  //           extralink: false,
-  //           submenu: []
-  //     }
-  //   ]
-  //},
-  {
-    path: '/tables/matters',
-        title: 'Matters',
-        icon: 'mdi mdi-layers',
+      },
+      {
+        path: '/apps/taskathand',
+        title: 'Task At Hand',
+        icon: 'mdi mdi-calendar-today',
         class: '',
         extralink: false,
         submenu: []
-  },
-  {
-    path: '/apps/tasklist',
-    title: 'Task List',
-    icon: 'mdi mdi-book-multiple',
-    class: '',
-    extralink: false,
-    submenu: []
-  },
-  {
-    path: '/apps/taskathand',
-    title: 'Task At Hand',
-    icon: 'mdi mdi-calendar-today',
-    class: '',
-    extralink: false,
-    submenu: []
-  },
-  {
-    path: '/apps/taskboard',
-    title: 'Taskboard',
-    icon: 'mdi mdi-bulletin-board',
-    class: '',
-    extralink: false,
-    submenu: []
+      },
+      {
+        path: '/apps/taskboard',
+        title: 'Taskboard',
+        icon: 'mdi mdi-bulletin-board',
+        class: '',
+        extralink: false,
+        submenu: []
+      },
+      {
+        path: '/sample-pages/pricing',
+        title: 'Pricing',
+        icon: 'mdi mdi-file-export',
+        class: '',
+        extralink: false,
+        submenu: []
+      }
+    ]
   },
   // {
   //   path: '',
@@ -139,14 +140,7 @@ export const ROUTES: RouteInfo[] = [
       // }
   //  ]
   //},
-  {
-    path: '/sample-pages/pricing',
-    title: 'Pricing',
-    icon: 'mdi mdi-file-export',
-    class: '',
-    extralink: false,
-    submenu: []
-  },
+  
   {
     path: '',
     title: 'Personal',

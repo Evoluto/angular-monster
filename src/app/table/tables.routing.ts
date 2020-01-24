@@ -6,7 +6,6 @@ import { BasictableComponent } from './basic/basic.component';
 import { DarktableComponent } from './dark-basic/dark.component';
 import { ColortableComponent } from './color-table/color.component';
 import { TablesizeComponent } from './sizing/size.component';
-import { ContactsComponent } from './contacts/contacts.component';
 import { Contacts1Component } from './contacts1/contacts1.component';
 import { MattersComponent } from './matters/matters.component';
 
@@ -14,17 +13,6 @@ export const TablesRoutes: Routes = [
   {
     path: '',
     children: [
-      {
-        path: 'contacts',
-        component: ContactsComponent,
-        data: {
-          title: 'Contacts',
-          urls: [
-            { title: 'Dashboard', url: '/dashboard' },
-            { title: 'Contacts' }
-          ]
-        }
-      },
       {
         path: 'contacts1',
         component: Contacts1Component,
@@ -35,7 +23,7 @@ export const TablesRoutes: Routes = [
             { title: 'Contacts' }
           ]
         }
-      },
+      }, 
       {
         path: 'matters',
         component: MattersComponent,
