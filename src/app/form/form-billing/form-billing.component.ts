@@ -61,9 +61,9 @@ export class FormbillingComponent implements OnInit {
       {
         "ApplicationTableId": "640",
         "FieldsList": [
-            { "Id": "5888", "Value": this.transaction_type_selected },
-            { "Id": "5889", "Value": this.amount},
-            { "Id": "5890", "Value": data2[0]["id"] }
+            { "Name": "item_type", "Value": this.transaction_type_selected },
+            { "Name": "amount", "Value": this.amount},
+            { "Name": "related_clients", "Value": data2[0]["id"] }
         ]
       }
     );

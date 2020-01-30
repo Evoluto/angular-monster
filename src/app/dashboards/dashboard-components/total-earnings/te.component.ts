@@ -15,7 +15,7 @@ export class TotalEarningComponent {
     },
     {
       image: 'assets/images/users/2.jpg',
-      name: 'Daniel Kristeen',
+      name: 'Nancy Stokes',
       labelcolor: 'badge-light-success text-success',
       amount: '$2300'
     },
