@@ -9,9 +9,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DragulaModule } from 'ng2-dragula';
 import { QuillModule } from 'ngx-quill';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
-import {HttpClientInMemoryWebApiModule} from 'angular-in-memory-web-api';
 
-import {InMemoryDataService}  from './gantt/in-memory-data.service'
 import { ReportService } from '../report.service';
 
 import { AppsRoutes } from './apps.routing';
@@ -38,8 +36,7 @@ import { FullcalendarComponent } from './fullcalendar/fullcalendar.component';
     DragulaModule.forRoot(),
     RouterModule.forChild(AppsRoutes),
     PerfectScrollbarModule,
-    HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService)
+    HttpClientModule
   ],
   declarations: [
     ChatComponent,

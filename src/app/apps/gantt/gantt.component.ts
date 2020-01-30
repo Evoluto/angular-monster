@@ -5,12 +5,13 @@ import { Task } from './task';
 import { Link } from './link';
 
 import "dhtmlx-gantt";
+import { ReportService } from 'src/app/report.service';
 
 @Component({
     encapsulation: ViewEncapsulation.None,
     selector: 'gantt',
     styleUrls: ['./gantt.component.css'],
-    providers: [TaskService, LinkService],
+    providers: [TaskService, LinkService, ReportService],
 	//template: `<div #gantt_here class='gantt-chart'></div>`,
 	templateUrl: './gantt.component.html'
 })
@@ -18,9 +19,11 @@ import "dhtmlx-gantt";
 export class GanttComponent implements OnInit {
 	@ViewChild("gantt_here", {static: true}) ganttContainer: ElementRef;
 	
-    constructor(private taskService: TaskService, private linkService: LinkService) { }
+    constructor(private taskService: TaskService, private linkService: LinkService, private reportService: ReportService) { }
 	
     ngOnInit() {
+
+		this.reportService.getToken('super_admin@mail.com', 'Miami123.');
 
 		gantt.config.xml_date = '%Y-%m-%d %H:%i';
 
