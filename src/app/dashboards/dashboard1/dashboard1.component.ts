@@ -107,8 +107,4 @@ export class Dashboard1Component implements AfterViewInit {
   ngAfterViewInit() {
     this.reportService.getToken('super_admin@mail.com', 'Miami123.');
   }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> dev
