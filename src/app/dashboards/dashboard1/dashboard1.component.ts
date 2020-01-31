@@ -4,6 +4,7 @@ import * as Chartist from 'chartist';
 import { ChartType, ChartEvent } from 'ng-chartist/dist/chartist.component';
 
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import { ReportService } from 'src/app/report.service';
 
 declare var require: any;
 
@@ -19,14 +20,15 @@ export interface Chart {
 
 @Component({
   templateUrl: './dashboard1.component.html',
-  styleUrls: ['./dashboard1.component.css']
+  styleUrls: ['./dashboard1.component.css'],
+  providers: [ReportService]
 })
 export class Dashboard1Component implements AfterViewInit {
 	
 	public config: PerfectScrollbarConfigInterface = {};
 
   subtitle: string;
-  constructor() {
+  constructor(private reportService: ReportService) {
     this.subtitle = 'This is some text within a card block.';
   }
 
@@ -102,5 +104,7 @@ export class Dashboard1Component implements AfterViewInit {
   public pieChartData: number[] = [300, 500, 100];
   public pieChartType = 'pie';
 
-  ngAfterViewInit() {}
+  ngAfterViewInit() {
+    this.reportService.getToken('super_admin@mail.com', 'Miami123.');
+  }
 }
