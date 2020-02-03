@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ReportService } from 'src/app/report.service';
+import { ReportService } from 'src/app/services/report.service';
 import { Router } from '@angular/router';
 import { ImplicitReceiver } from '@angular/compiler';
 

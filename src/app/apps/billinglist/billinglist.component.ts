@@ -1,5 +1,5 @@
 import { Component, ViewChild, ViewEncapsulation, OnInit } from '@angular/core';
-import { ReportService } from 'src/app/report.service';
+import { ReportService } from 'src/app/services/report.service';
 import { CurrencyPipe, formatCurrency } from '@angular/common';
 import { ImplicitReceiver } from '@angular/compiler';
 

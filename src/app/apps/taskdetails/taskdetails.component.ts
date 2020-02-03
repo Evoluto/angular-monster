@@ -1,6 +1,6 @@
 import { Component, AfterViewInit, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ReportService } from 'src/app/report.service';
+import { ReportService } from 'src/app/services/report.service';
 
 @Component({
   templateUrl: './taskdetails.component.html'

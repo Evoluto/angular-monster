@@ -1,5 +1,5 @@
 import { Component, ViewChild, ViewEncapsulation, OnInit } from '@angular/core';
-import { ReportService } from 'src/app/report.service';
+import { ReportService } from 'src/app/services/report.service';
 import { getDate } from 'date-fns';
 import { now } from 'd3';
 import { ImplicitReceiver } from '@angular/compiler';

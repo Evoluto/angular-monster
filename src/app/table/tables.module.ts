@@ -13,7 +13,7 @@ import { ColortableComponent } from './color-table/color.component';
 import { TablesizeComponent } from './sizing/size.component';
 import { Contacts1Component } from './contacts1/contacts1.component';
 import { MattersComponent } from './matters/matters.component';
-import { ReportService } from '../report.service';
+import { ReportService } from '../services/report.service';
 import { DataTablesModule } from 'angular-datatables';
 
 @NgModule({

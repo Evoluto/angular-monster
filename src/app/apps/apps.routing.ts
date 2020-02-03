@@ -8,9 +8,10 @@ import { TaskathandComponent } from './taskathand/taskathand.component';
 import { TaskdetailsComponent } from './taskdetails/taskdetails.component';
 import { BillinglistComponent } from './billinglist/billinglist.component';
 import { ProjectsComponent } from './projects/projects.component';
-import { GanttComponent } from './gantt/gantt.component';
+import { GanttComponent } from '../charts/gantt/gantt.component';
 import { TaskboardComponent } from './taskboard/taskboard.component';
 import { FullcalendarComponent } from './fullcalendar/fullcalendar.component';
+import { ReportResolverService } from '../services/report-resolver.service';
 
 export const AppsRoutes: Routes = [
   {
@@ -108,11 +109,15 @@ export const AppsRoutes: Routes = [
         path: 'projects',
         component: ProjectsComponent,
         data: {
+          reportId: 439,
           title: 'Projects',
           urls: [
             { title: 'Dashboard', url: '/dashboard' },
             { title: 'Projects' }
           ]
+        },
+        resolve: {
+          reportData: ReportResolverService
         }
       },
       {

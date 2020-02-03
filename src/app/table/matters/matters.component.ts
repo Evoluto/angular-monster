@@ -1,5 +1,5 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { ReportService } from 'src/app/report.service';
+import { ReportService } from 'src/app/services/report.service';
 
 @Component({
   selector: 'app-matters',

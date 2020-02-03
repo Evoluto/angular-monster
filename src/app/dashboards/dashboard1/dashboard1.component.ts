@@ -4,7 +4,7 @@ import * as Chartist from 'chartist';
 import { ChartType, ChartEvent } from 'ng-chartist/dist/chartist.component';
 
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
-import { ReportService } from 'src/app/report.service';
+import { ReportService } from 'src/app/services/report.service';
 
 declare var require: any;
 

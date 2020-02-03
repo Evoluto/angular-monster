@@ -1,11 +1,10 @@
-import { Component, ViewChild, ViewEncapsulation, OnInit } from '@angular/core';
-import { ReportService } from 'src/app/report.service';
-import { CurrencyPipe, formatCurrency } from '@angular/common';
-import { ImplicitReceiver } from '@angular/compiler';
+import { Component, ViewChild, ViewEncapsulation, OnInit, DoCheck, OnChanges } from '@angular/core';
+import { ReportService } from 'src/app/services/report.service';
+import { SpinnerService } from 'src/app/services/spinner.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  templateUrl: './projects.component.html',
-  encapsulation: ViewEncapsulation.None
+  templateUrl: './projects.component.html'
 })
 
 export class ProjectsComponent implements OnInit {
@@ -24,15 +23,21 @@ export class ProjectsComponent implements OnInit {
   thisAgencyID = "";
  
   @ViewChild(ProjectsComponent, { static: false }) table: ProjectsComponent;
-  constructor(private reportService: ReportService) {
-    setTimeout(() => {
-      //this.loadingIndicator = false;
-    }, 1500);
+  constructor(
+    private route: ActivatedRoute,
+    private spinner: SpinnerService,
+    private reportService: ReportService) {
   }
 
   getReportData(): void{
-    this.reportService.queryReport({ReportId: 439})
-      .subscribe(response => this.transformReportData(response));
+    this.route.data
+    .subscribe((data: { reportData: Object[] }) => {
+      this.transformReportData(data.reportData);
+    });
+    // this.reportService.queryReport({ReportId: 439})
+    //   .subscribe(response => {
+    //     this.transformReportData(response);
+    //   });
   }
 
   transformReportData(reportData: Object[]): void {
@@ -58,7 +63,10 @@ export class ProjectsComponent implements OnInit {
             ]
         }
       ] })
-      .subscribe(response => this.loadProjects(response));
+      .subscribe(response => {
+        this.loadProjects(response);
+        this.spinner.stop();
+      });
   }
 
   loadProjects(reportData: Object[]): void{
