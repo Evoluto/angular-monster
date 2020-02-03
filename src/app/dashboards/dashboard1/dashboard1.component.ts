@@ -5,6 +5,7 @@ import { ChartType, ChartEvent } from 'ng-chartist/dist/chartist.component';
 
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { ReportService } from 'src/app/services/report.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 declare var require: any;
 
@@ -28,7 +29,9 @@ export class Dashboard1Component implements AfterViewInit {
 	public config: PerfectScrollbarConfigInterface = {};
 
   subtitle: string;
-  constructor(private reportService: ReportService) {
+  constructor(
+    private reportService: ReportService,
+    private authService: AuthService) {
     this.subtitle = 'This is some text within a card block.';
   }
 
@@ -105,6 +108,6 @@ export class Dashboard1Component implements AfterViewInit {
   public pieChartType = 'pie';
 
   ngAfterViewInit() {
-    this.reportService.getToken('super_admin@mail.com', 'Miami123.');
+    this.authService.getToken('super_admin@mail.com', 'Miami123.');
   }
 }

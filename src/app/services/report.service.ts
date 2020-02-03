@@ -39,23 +39,4 @@ export class ReportService {
     const url = "https://ignatius.io/api/field/getdropdownvalues?id=" + id;
     return this.http.get<Object[]>(url, this.httpOptions)
   }
-
-  getToken(username: string, password: string): void {
-    const url = 'https://ignatius.io/token';
-    let params = new HttpParams();
-    params = params.append('grant_type', 'password');
-    params = params.append('username', username);
-    params = params.append('password', password);
-    const options = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/x-www-form-urlencoded'
-      })
-    };
-
-    this.http.post(url, params, options).toPromise().then(
-      response => {
-        localStorage.setItem('token', response['access_token']);
-      });
-  }
-
 }

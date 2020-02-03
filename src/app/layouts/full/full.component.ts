@@ -12,7 +12,7 @@ import { SpinnerService } from 'src/app/services/spinner.service';
 })
 export class FullComponent implements OnInit {
   public config: PerfectScrollbarConfigInterface = {};
-  private isSpinnerVisible: boolean = true;
+  private isSpinnerVisible: boolean = false;
   
   constructor(
     private spinner: SpinnerService,

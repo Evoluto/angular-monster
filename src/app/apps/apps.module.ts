@@ -20,7 +20,7 @@ import { TasklistComponent } from './tasklist/tasklist.component';
 import { TaskathandComponent } from './taskathand/taskathand.component';
 import { BillinglistComponent } from './billinglist/billinglist.component';
 import { ProjectsComponent } from './projects/projects.component';
-import { GanttComponent } from '../charts/gantt/gantt.component';
+import { GanttComponent } from './gantt/gantt.component';
 import { TaskdetailsComponent } from './taskdetails/taskdetails.component';
 import { TaskboardComponent } from './taskboard/taskboard.component';
 import { FullcalendarComponent } from './fullcalendar/fullcalendar.component';

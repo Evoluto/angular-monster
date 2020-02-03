@@ -31,13 +31,9 @@ export class ProjectsComponent implements OnInit {
 
   getReportData(): void{
     this.route.data
-    .subscribe((data: { reportData: Object[] }) => {
-      this.transformReportData(data.reportData);
-    });
-    // this.reportService.queryReport({ReportId: 439})
-    //   .subscribe(response => {
-    //     this.transformReportData(response);
-    //   });
+      .subscribe((data: { reportData: Object[] }) => {
+        this.transformReportData(data.reportData);
+      });
   }
 
   transformReportData(reportData: Object[]): void {

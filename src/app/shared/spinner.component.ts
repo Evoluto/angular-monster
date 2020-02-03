@@ -13,7 +13,6 @@ import {
   NavigationError
 } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
-import { SpinnerService } from '../services/spinner.service';
 
 @Component({
   selector: 'app-spinner',
@@ -26,13 +25,12 @@ import { SpinnerService } from '../services/spinner.service';
   encapsulation: ViewEncapsulation.None
 })
 export class SpinnerComponent implements OnDestroy {
-  public isSpinnerVisible = true;
+  public isSpinnerVisible = false;
 
   @Input() public backgroundColor = 'rgba(0, 115, 170, 0.69)';
   @Input() public isPreloader = true;
 
   constructor(
-    private spinner: SpinnerService,
     private router: Router,
     @Inject(DOCUMENT) private document: Document
   ) {
