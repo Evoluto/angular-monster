@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ReportService } from 'src/app/services/report.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ImplicitReceiver } from '@angular/compiler';
+import { ContentSpinnerService } from 'src/app/services/content-spinner.service';
 
 @Component({
   selector: 'app-form-horizontal',
@@ -21,12 +22,18 @@ export class FormbillingComponent implements OnInit {
   amount = '';
 
   @ViewChild(FormbillingComponent, { static: false }) table: FormbillingComponent;
-  constructor(private reportService: ReportService, private router: Router) {
+  constructor(
+    private route: ActivatedRoute,
+    private spinner: ContentSpinnerService,
+    private reportService: ReportService, 
+    private router: Router) {
   }
 
   getReportData(): void{
-    this.reportService.queryReport({ReportId: 604})
-      .subscribe(response => this.transformReportData(response));
+    this.route.data
+      .subscribe((data: { reportData: Object[] }) => {
+        this.transformReportData(data.reportData);
+      });
   }
 
   transformReportData(reportData: Object[]): void{
@@ -45,6 +52,8 @@ export class FormbillingComponent implements OnInit {
     for (var i=0; i < data5.length; i++) {
       this.transaction_types.push(data5[i]["name"]);
     }
+
+    this.spinner.stop();
   }
 
   saveBillingItem(event: any) {

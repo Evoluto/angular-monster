@@ -140,7 +140,9 @@ export class ProjectsComponent implements OnInit {
               ]
           }
       ] })
-      .subscribe(response => this.loadDataResults(response));
+      .subscribe(response => {
+        this.loadDataResults(response);
+      });
     }
     // else if (this.transaction_type_selected != "All Transaction Types" && this.transaction_type_selected != "")
     // {

@@ -1,6 +1,8 @@
 import { Component, ViewChild, ViewEncapsulation, OnInit } from '@angular/core';
 import { ReportService } from 'src/app/services/report.service';
 import { ImplicitReceiver } from '@angular/compiler';
+import { ContentSpinnerService } from 'src/app/services/content-spinner.service';
+import { ActivatedRoute } from '@angular/router';
 //import { ExcelService } from '../../excel.service';
 
 @Component({
@@ -20,13 +22,17 @@ export class TasklistComponent implements OnInit {
   task_table: string = "";
 
   @ViewChild(TasklistComponent, { static: false }) table: TasklistComponent;
-  constructor(private reportService: ReportService) {
+  constructor(
+    private reportService: ReportService,
+    private spinner: ContentSpinnerService,
+    private route: ActivatedRoute) {
   }
   
-
   getReportData(): void{
-    this.reportService.queryReport({ReportId: 586})
-      .subscribe(response => this.transformReportData(response));
+    this.route.data
+      .subscribe((data: { reportData: Object[] }) => {
+        this.transformReportData(data.reportData);
+      });
   }
 
   transformReportData(reportData: Object[]): void{
@@ -60,6 +66,8 @@ export class TasklistComponent implements OnInit {
       this.task_table += "</tr>";
     }
     this.task_table += "</table></td></tr>";
+
+    this.spinner.stop();
   }
   
 }

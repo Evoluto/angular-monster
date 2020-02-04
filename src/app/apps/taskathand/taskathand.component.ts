@@ -1,8 +1,8 @@
 import { Component, ViewChild, ViewEncapsulation, OnInit } from '@angular/core';
 import { ReportService } from 'src/app/services/report.service';
-import { getDate } from 'date-fns';
 import { now } from 'd3';
-import { ImplicitReceiver } from '@angular/compiler';
+import { ActivatedRoute } from '@angular/router';
+import { ContentSpinnerService } from 'src/app/services/content-spinner.service';
 
 
 @Component({
@@ -30,12 +30,17 @@ export class TaskathandComponent implements OnInit {
   task_id: number = 0;
 
   @ViewChild(TaskathandComponent, { static: false }) table: TaskathandComponent;
-  constructor(private reportService: ReportService) {
+  constructor(
+    private spinner: ContentSpinnerService,
+    private route: ActivatedRoute,
+    private reportService: ReportService) {
   }
 
   getReportData(): void{
-    this.reportService.queryReport({ReportId: 586})
-      .subscribe(response => this.transformReportData(response));
+    this.route.data
+      .subscribe((data: { reportData: Object[] }) => {
+        this.transformReportData(data.reportData);
+      });
   }
 
   transformReportData(reportData: Object[]): void {
@@ -82,6 +87,8 @@ export class TaskathandComponent implements OnInit {
       this.client =  data2[i]["tbl628_first_name"] + " " + data2[i]["tbl628_last_name"];
       this.matter_description = data2[i]["tbl631_description"];
    }
+
+   this.spinner.stop();
   }
   startTimer() {
     var data = this.reportService.putData({"ApplicationTableId": "635","FieldsList": [{ "Id": "5626", "Value": "In Progress" },{"Id": "5703", "Value": now() }],"Where": { "Id": "5618", "Value": this.task_id}});

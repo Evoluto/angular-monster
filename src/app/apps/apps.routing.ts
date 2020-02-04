@@ -54,22 +54,30 @@ export const AppsRoutes: Routes = [
         path: 'tasklist',
         component: TasklistComponent,
         data: {
+          reportId: 586,
           title: 'Task List',
           urls: [
             { title: 'Dashboard', url: '/dashboard' },
             { title: 'Task List' }
           ]
+        },
+        resolve: {
+          reportData: ReportResolverService
         }
       },
       {
         path: 'taskathand',
         component: TaskathandComponent,
         data: {
+          reportId: 586,
           title: 'Task At Hand',
           urls: [
             { title: 'Dashboard', url: '/dashboard' },
             { title: 'Task At Hand' }
           ]
+        },
+        resolve: {
+          reportData: ReportResolverService
         }
       },
       {
@@ -98,11 +106,15 @@ export const AppsRoutes: Routes = [
         path: 'billinglist',
         component: BillinglistComponent,
         data: {
+          reportId: 604,
           title: 'Billing List',
           urls: [
             { title: 'Dashboard', url: '/dashboard' },
             { title: 'Billing List' }
           ]
+        },
+        resolve: {
+          reportData: ReportResolverService
         }
       },
       {

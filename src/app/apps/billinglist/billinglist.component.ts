@@ -2,6 +2,8 @@ import { Component, ViewChild, ViewEncapsulation, OnInit } from '@angular/core';
 import { ReportService } from 'src/app/services/report.service';
 import { CurrencyPipe, formatCurrency } from '@angular/common';
 import { ImplicitReceiver } from '@angular/compiler';
+import { ActivatedRoute } from '@angular/router';
+import { ContentSpinnerService } from 'src/app/services/content-spinner.service';
 
 @Component({
   templateUrl: './billinglist.component.html',
@@ -25,15 +27,17 @@ export class BillinglistComponent implements OnInit {
   thisClientID = "";
  
   @ViewChild(BillinglistComponent, { static: false }) table: BillinglistComponent;
-  constructor(private reportService: ReportService) {
-    setTimeout(() => {
-      //this.loadingIndicator = false;
-    }, 1500);
+  constructor(
+    private spinner: ContentSpinnerService,
+    private reportService: ReportService, 
+    private route: ActivatedRoute,) {
   }
 
   getReportData(): void{
-    this.reportService.queryReport({ReportId: 604})
-      .subscribe(response => this.transformReportData(response));
+    this.route.data
+      .subscribe((data: { reportData: Object[] }) => {
+        this.transformReportData(data.reportData);
+      });
   }
 
   transformReportData(reportData: Object[]): void {
@@ -217,6 +221,8 @@ export class BillinglistComponent implements OnInit {
             }
           }
     }
+
+    this.spinner.stop();
   }
 
   getClientIDResults(reportData: Object[]): void {

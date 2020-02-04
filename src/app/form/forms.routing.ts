@@ -13,6 +13,7 @@ import { FormstripedComponent } from './form-striped-row/striped.component';
 import { FormdetailComponent } from './form-detail/detail.component';
 import { MultiselectComponent } from './multiselect/multiselect.component';
 import { FormbillingComponent } from './form-billing/form-billing.component';
+import { ReportResolverService } from '../services/report-resolver.service';
 
 export const FormsRoutes: Routes = [
   {
@@ -22,11 +23,15 @@ export const FormsRoutes: Routes = [
         path: 'formbilling',
         component: FormbillingComponent,
         data: {
+          reportId: 604,
           title: 'Billing Form',
           urls: [
             { title: 'Dashboard', url: '/dashboard' },
             { title: 'Billing Form' }
           ]
+        },
+        resolve: {
+          reportData: ReportResolverService
         }
       },
       {
