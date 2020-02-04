@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpParams, HttpHeaders, HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { User } from '../models/User';
+import { User } from '../models/user';
 import { BehaviorSubject, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
