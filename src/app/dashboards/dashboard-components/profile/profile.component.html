@@ -1,11 +1,8 @@
 <div class="card">
     <div class="card-body">
         <div class="d-flex flex-row">
-            <div class="">
-                <img src="assets/images/users/1.jpg" alt="user" class="rounded-circle" width="100">
-            </div>
             <div class="p-l-20">
-                <h3 class="">Nancy Stokes</h3>
+                <h3 class="">{{this.authService.user.getValue().userName}}</h3>
                 <h6>UIUX Designer</h6>
                 <button class="btn btn-success text-white">
                     <i class="ti-plus"></i> Follow</button>
