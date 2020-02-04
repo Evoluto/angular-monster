@@ -77,7 +77,6 @@ export class AuthService {
   }
 
   private handleError(errorRes: HttpErrorResponse) {
-    let errorMessage = 'An error occurred!';
-    return throwError(errorMessage);
+    return throwError('Invalid Username or Password');
   }
 }
