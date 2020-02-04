@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 import { RouteDataService } from './route-data.service';
-import { SpinnerService } from './spinner.service';
+import { ContentSpinnerService } from './content-spinner.service';
 import { ReportService } from './report.service';
 
 @Injectable({
@@ -18,7 +18,7 @@ export class ReportResolverService implements Resolve<Object[]>{
   }
 
   constructor(
-    private spinner: SpinnerService,
+    private spinner: ContentSpinnerService,
     private reportService: ReportService,
     private routeDataService: RouteDataService) 
     { }

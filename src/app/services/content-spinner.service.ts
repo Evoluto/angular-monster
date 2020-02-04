@@ -5,7 +5,7 @@ import 'rxjs/add/operator/share';
 @Injectable({
     providedIn: 'root'
   })
-export class SpinnerService {
+export class ContentSpinnerService {
   public status: Subject<boolean> = new Subject();
   private _active: boolean = false;
 

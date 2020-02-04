@@ -1,6 +1,6 @@
 import { Component, ViewChild, ViewEncapsulation, OnInit, DoCheck, OnChanges } from '@angular/core';
 import { ReportService } from 'src/app/services/report.service';
-import { SpinnerService } from 'src/app/services/spinner.service';
+import { ContentSpinnerService } from 'src/app/services/content-spinner.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -25,7 +25,7 @@ export class ProjectsComponent implements OnInit {
   @ViewChild(ProjectsComponent, { static: false }) table: ProjectsComponent;
   constructor(
     private route: ActivatedRoute,
-    private spinner: SpinnerService,
+    private spinner: ContentSpinnerService,
     private reportService: ReportService) {
   }
 

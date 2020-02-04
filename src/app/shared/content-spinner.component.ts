@@ -7,7 +7,7 @@ import {
   } from '@angular/core';
 import { Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
-import { SpinnerService } from '../services/spinner.service';
+import { ContentSpinnerService } from '../services/content-spinner.service';
   
 @Component({
   selector: 'content-spinner',
@@ -26,7 +26,7 @@ export class ContentSpinnerComponent implements OnDestroy {
   @Input() public backgroundColor = 'rgba(0, 150, 170, 0.3)';
 
   constructor(
-    private spinner: SpinnerService,
+    private spinner: ContentSpinnerService,
     private router: Router,
     @Inject(DOCUMENT) private document: Document
   ) {

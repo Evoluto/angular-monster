@@ -1,8 +1,8 @@
 import { Component, AfterViewInit, OnInit } from '@angular/core';
 import { ROUTES } from './menu-items';
-import { RouteInfo } from './sidebar.metadata';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from 'src/app/services/auth.service';
 declare var $: any;
 
 @Component({
@@ -21,6 +21,7 @@ export class SidebarComponent implements OnInit {
       this.showMenu = element;
     }
   }
+
   addActiveClass(element: any) {
     if (element === this.showSubMenu) {
       this.showSubMenu = '0';
@@ -29,10 +30,15 @@ export class SidebarComponent implements OnInit {
     }
   }
 
+  logout(){
+    this.authService.logout();
+  }
+
   constructor(
     private modalService: NgbModal,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private authService: AuthService
   ) {}
 
   // End open close

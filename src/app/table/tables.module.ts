@@ -33,9 +33,6 @@ import { DataTablesModule } from 'angular-datatables';
     SmarttableComponent,
     Contacts1Component,
     MattersComponent
-  ],
-  providers: [
-    ReportService
   ]
 })
 export class TablesModule {}

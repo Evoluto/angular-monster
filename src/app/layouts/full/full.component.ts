@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 declare var $: any;
 
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
-import { SpinnerService } from 'src/app/services/spinner.service';
+import { ContentSpinnerService } from 'src/app/services/content-spinner.service';
 
 @Component({
   selector: 'app-full-layout',
@@ -15,7 +15,7 @@ export class FullComponent implements OnInit {
   private isSpinnerVisible: boolean = false;
   
   constructor(
-    private spinner: SpinnerService,
+    private spinner: ContentSpinnerService,
     public router: Router) { 
       spinner.status.subscribe((status: boolean) => {
         this.isSpinnerVisible = status;

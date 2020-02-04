@@ -21,10 +21,9 @@ export interface Chart {
 
 @Component({
   templateUrl: './dashboard1.component.html',
-  styleUrls: ['./dashboard1.component.css'],
-  providers: [ReportService]
+  styleUrls: ['./dashboard1.component.css']
 })
-export class Dashboard1Component implements AfterViewInit {
+export class Dashboard1Component {
 	
 	public config: PerfectScrollbarConfigInterface = {};
 
@@ -107,7 +106,4 @@ export class Dashboard1Component implements AfterViewInit {
   public pieChartData: number[] = [300, 500, 100];
   public pieChartType = 'pie';
 
-  ngAfterViewInit() {
-    this.authService.getToken('super_admin@mail.com', 'Miami123.');
-  }
 }
