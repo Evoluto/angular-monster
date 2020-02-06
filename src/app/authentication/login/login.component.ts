@@ -8,6 +8,8 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginComponent {
   msg = '';
+  isLoading = false;
+
   constructor(
     private authService: AuthService, 
     private routes: Router) { }
@@ -19,16 +21,20 @@ export class LoginComponent {
     this.loginform = !this.loginform;
     this.recoverform = !this.recoverform;
   }
+
+  getButtonStyle(): string{
+    return this.isLoading ? '#076aac73' : '#076aace8';
+  }
   
   check(username: string, password: string) {
+    this.isLoading = true;
     this.authService
       .signIn(username, password)
       .subscribe(user => {
-        if(user){
-          this.routes.navigate(['/']);
-        }
+        this.routes.navigate(['/']);
       }, error => {
         this.msg = error;
+        this.isLoading = false;
       });
   }
 }
