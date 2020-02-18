@@ -58,8 +58,8 @@ export class TaskathandComponent implements OnInit {
         this.task_status = "<span class='label label-warning'>" + data2[i]["tbl635_status"] + "</span>";
         //this.buttons = "<button type='button' class='btn btn-primary'>Stop</button>";
         this.visible_start = false;
-        this.visible_stop = true;
-        this.visible_complete = false;
+        this.visible_stop = false;
+        this.visible_complete = true;
       }
       if (data2[i]["tbl635_status"] == "In Queue" || data2[i]["tbl635_status"] == "Assigned")
       {
@@ -90,8 +90,9 @@ export class TaskathandComponent implements OnInit {
 
    this.spinner.stop();
   }
+
   startTimer() {
-    var data = this.reportService.putData({"ApplicationTableId": "635","FieldsList": [{ "Id": "5626", "Value": "In Progress" },{"Id": "5703", "Value": now() }],"Where": { "Id": "5618", "Value": this.task_id}});
+    var data = this.reportService.putData({"ApplicationTableId": "635","FieldsList": [{ "Name": "status", "Value": "In Progress" },{"Name": "start_dt", "Value": now() }],"Where": { "rid" : this.task_id}});
     alert("Task Updated");
     location.reload();
   }
