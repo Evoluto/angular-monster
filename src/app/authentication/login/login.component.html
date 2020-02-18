@@ -26,8 +26,14 @@
                             </div>
                             <div class="form-group text-center">
                                 <div class="col-xs-12 p-b-20">
-                                    <button style="background-color: #076aace8; border: 0;" class="btn btn-block btn-lg btn-info" type="button" (click)="check(u1.value, p2.value)">Log
-                                    In</button>
+                                    <button 
+                                        [ngStyle]="{'background-color': getButtonStyle()}"
+                                        class="btn btn-block btn-lg btn-info"
+                                        type="button" 
+                                        (click)="check(u1.value, p2.value)">
+                                        Log In
+                                        <i *ngIf="isLoading" class="fa fa-spinner fa-pulse"></i>
+                                    </button>
                                 </div>
                             </div>
                         </form>
