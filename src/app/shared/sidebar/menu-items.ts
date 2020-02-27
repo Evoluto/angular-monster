@@ -855,6 +855,25 @@ import { RouteInfo } from './sidebar.metadata';
 export const ROUTES: RouteInfo[] = [
   {
     path: '',
+    title: 'Project Worksheets',
+    icon: 'mdi mdi-briefcase',
+    class: 'has-arrow',
+    
+    extralink: false,
+    submenu: [
+      {
+        path: '/project-worksheets/projects',
+            title: 'Projects',
+            icon: 'mdi mdi-clipboard',
+            class: '',
+            
+            extralink: false,
+            submenu: []
+      }
+    ]
+  },
+  {
+    path: '',
     title: 'Project Mgmt',
     icon: 'mdi mdi-briefcase',
     class: 'has-arrow',
