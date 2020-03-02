@@ -1,22 +1,526 @@
+
+
 <div class="row">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Edit Delete and update Table</h4>
-                <h6 class="card-subtitle">Smart data table library with sorting, filtering, pagination & add/edit/delete functions.</h6>
-                <div class="table table-responsive smart-table">
-                    <ng2-smart-table [settings]="settings" [source]="source" class=""></ng2-smart-table>
+	<div class="col-12">
+		<div class="card">
+			<div class="card-body">
+        <h4 class="card-title">Filters</h4>
+				<ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+					<ngb-panel title="Expand / Collapse">
+						<ng-template ngbPanelContent>
+              <div class="row">
+                  <div class="col-md-2">
+                      <label for="sector" class="control-label col-form-label">Sectors: </label>
+                  </div>
+                  <div class="col-md-4">
+                    <select id="sector" #sector (change)="selectSectorChangeHandler($event)">
+                          <option [ngValue]="sectors" *ngFor = "let sector of sectors">
+                              <small>{{sector}}</small>
+                          </option>
+                      </select>
+                  </div>
+                  <div class="col-md-2">
+                      <label for="applicant" class="control-label col-form-label">Applicants: </label>
+                  </div>
+                  <div class="col-md-4">
+                      <select id="applicant" #applicant (change)="selectApplicantChangeHandler($event)">
+                          <option [ngValue]="applicants" *ngFor = "let applicant of applicants">
+                              {{applicant}}
+                          </option>
+                      </select>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-md-2">
+                      <label for="sector" class="control-label col-form-label">Disasters: </label>
+                  </div>
+                  <div class="col-md-4">
+                      <select id="disaster" #disaster (change)="selectDisasterChangeHandler($event)">
+                          <option [ngValue]="disasters" *ngFor = "let disaster of disasters">
+                              {{disaster}}
+                          </option>
+                      </select>
+                  </div>
+                  <div class="col-md-2">
+                      <label for="applicant" class="control-label col-form-label">Categories: </label>
+                  </div>
+                  <div class="col-md-4">
+                      <select id="category" #category (change)="selectCategoryChangeHandler($event)">
+                          <option [ngValue]="categories" *ngFor = "let category of categories">
+                              {{category}}
+                          </option>
+                      </select>
+                  </div>
+              </div>
+              <div class="row">
+                <div class="col-md-10"></div>
+                <div class="col-md-2">
+                  <button type="submit" class="btn btn-success" (click)="apply_filters()"> Apply Filters</button>
                 </div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Filterable Table</h4>
-                <h6 class="card-subtitle">Smart data table library with sorting, filtering, pagination & add/edit/delete functions.</h6>
-                <div class="table table-responsive smart-table">
-                    <ng2-smart-table [settings]="settings2" [source]="source2" class=""></ng2-smart-table>
+              </div>
+            </ng-template>
+					</ngb-panel>
+        </ngb-accordion>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL FOR EDITING PROJECT -->
+<ng-template #modalcontent let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Edit Project</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-sm-12">
+          <div class="card">
+              <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <h6 class="card-subtitle">GM No</h6>
+                      <input type="text" [(ngModel)]="input_data['gm_no']" [ngModelOptions]="{standalone: true}" class="form-control">
+                    </div>
+                    <div class="col-md-3">
+                      <h6 class="card-subtitle">Estimated Cost</h6>
+                      <input type="text" [(ngModel)]="input_data['estimated_cost']" [ngModelOptions]="{standalone: true}" class="form-control">
+                  </div>
                 </div>
-            </div>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="form-actions">
+      <div class="card-body">
+          <button type="submit" class="btn btn-success" (click)="modal.close('Save click')"> <i class="fa fa-check"></i> Save</button>
+          <button type="button" class="btn btn-dark" (click)="modal.close()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+
+<div class="row">
+	<div class="col-12">
+		<div class="card">
+			<div class="card-body">
+        <h4 class="card-title">Projects</h4>
+          <ngx-datatable
+            #myTable
+            class="material expandable"
+            [columnMode]="ColumnMode.force"
+            [headerHeight]="50"
+            [footerHeight]="50"
+            [rowHeight]="50"
+            [scrollbarV]="true"
+            [rows]="rows"
+            (page)="onPage($event)"
+          >
+
+            <!-- Row Detail Template -->
+            <ngx-datatable-row-detail rowHeight="800" #myDetailRow (toggle)="onDetailToggle($event)">
+              <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+                <div class="row">
+                  <button class="btn" (click)="openModalEdit(modalcontent,row)"><i class="ti-pencil text-info m-r-10"></i></button>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <section id="ngx">
+                      <div class="card">
+                          <div class="card-body">
+                              <div class="card-block">
+                                  <div class="board">
+                                    <ul class="wizard-navbar">
+                                      <div class="liner"></div>
+                                      <li class="flex-fill" >
+                                        <span *ngIf="row.si !== 'N/A' && row.si !== 'Not Identified' && row.si !== 'Not Started' && row.si !== 'In Process' && 
+                                                     row.si !== 'Schedule Pending' && row.si !== 'Scheduled' && row.si !== 'Agreement w/ FEMA' && 
+                                                     row.si !== 'Disagreement w/ FEMA' && row.si !== 'Pending Validation' && row.si !== 'Signed Engineer Report' && 
+                                                     row.si !== 'Completed' && row.si !== 'Obligated'" class="ng-dark round-tabs"><span style="color:black;"><i class="fas fa-question font-size:x-large"><br><span style="font-size:smaller;">&nbsp;&nbsp;SI&nbsp;&nbsp;</span></i></span></span>
+                                        <span *ngIf="row.si === 'N/A'" class="ng-secondary round-tabs"><span style="color:black;"><i class="fas fa-minus-circle font-size:x-large"><br><span style="font-size:smaller;">&nbsp;&nbsp;SI&nbsp;&nbsp;</span></i></span></span>
+                                        <span *ngIf="row.si === 'Not Identified'" class="ng-danger round-tabs"><span style="color:black;"><i class="fas fa-exclamation font-size:x-large"><br><span style="font-size:smaller;">&nbsp;&nbsp;SI&nbsp;&nbsp;</span></i></span></span>
+                                        <span *ngIf="row.si === 'Not Started'" class="ng-danger round-tabs"><span style="color:black;"><i class="fas fa-question font-size:x-large"><br><span style="font-size:smaller;">&nbsp;&nbsp;SI&nbsp;&nbsp;</span></i></span></span>
+                                        <span *ngIf="row.si === 'In Process'" class="ng-info round-tabs"><span style="color:black;"><i class="fas fa-play-circle font-size:x-large"><br><span style="font-size:smaller;">&nbsp;&nbsp;SI&nbsp;&nbsp;</span></i></span></span>
+                                        <span *ngIf="row.si === 'Schedule Pending'" class="ng-warning round-tabs"><span style="color:black;"><i class="far fa-calendar-minus font-size:x-large"><br><span style="font-size:smaller;">&nbsp;&nbsp;SI&nbsp;&nbsp;</span></i></span></span>
+                                        <span *ngIf="row.si === 'Scheduled'" class="ng-info round-tabs"><span style="color:black;"><i class="far fa-calendar-check font-size:x-large"><br><span style="font-size:smaller;">&nbsp;&nbsp;SI&nbsp;&nbsp;</span></i></span></span>
+                                        <span *ngIf="row.si === 'Agreement w/ FEMA'" class="ng-info round-tabs"><span style="color:black;"><i class="fas fa-thumbs-up font-size:x-large"><br><span style="font-size:smaller;">&nbsp;&nbsp;SI&nbsp;&nbsp;</span></i></span></span>
+                                        <span *ngIf="row.si === 'Disagreement w/ FEMA'" class="ng-danger round-tabs"><span style="color:black;"><i class="fas fa-thumbs-down font-size:x-large"><br><span style="font-size:smaller;">&nbsp;&nbsp;SI&nbsp;&nbsp;</span></i></span></span>
+                                        <span *ngIf="row.si === 'Pending Validation'" class="ng-warning round-tabs"><span style="color:black;"><i class="fas fa-pause font-size:x-large"><br><span style="font-size:smaller;">&nbsp;&nbsp;SI&nbsp;&nbsp;</span></i></span></span>
+                                        <span *ngIf="row.si === 'Signed Engineer Report'" class="ng-info round-tabs"><span style="color:black;"><i class="fas fa-certificate font-size:x-large"><br><span style="font-size:smaller;">&nbsp;&nbsp;SI&nbsp;&nbsp;</span></i></span></span>
+                                        <span *ngIf="row.si === 'Completed'" class="ng-success round-tabs"><span style="color:black;"><i class="fas fa-check font-size:x-large"><br><span style="font-size:smaller;">&nbsp;&nbsp;SI&nbsp;&nbsp;</span></i></span></span>
+                                        <span *ngIf="row.si === 'Obligated'" class="ng-success round-tabs"><span style="color:black;"><i class="fas fa-dollar-sign font-size:x-large"><br><span style="font-size:smaller;">&nbsp;&nbsp;SI&nbsp;&nbsp;</span></i></span></span>
+                                      </li>
+                                      <li class="flex-fill">
+                                        <span *ngIf="row.ddd !== 'N/A' && row.ddd !== 'Not Identified' && row.ddd !== 'Not Started' && row.ddd !== 'In Process' && 
+                                                     row.ddd !== 'Schedule Pending' && row.ddd !== 'Scheduled' && row.ddd !== 'Agreement w/ FEMA' && 
+                                                     row.ddd !== 'Disagreement w/ FEMA' && row.ddd !== 'Pending Validation' && row.ddd !== 'Signed Engineer Report' && 
+                                                     row.ddd !== 'Completed' && row.ddd !== 'Obligated'" class="ng-dark round-tabs"><span style="color:black;"><i class="fas fa-question font-size:x-large"><br><span style="font-size:smaller;">DDD</span></i></span></span>
+                                        <span *ngIf="row.ddd === 'N/A'" class="ng-secondary round-tabs"><span style="color:black;"><i class="fas fa-minus-circle font-size:x-large"><br><span style="font-size:smaller;">DDD</span></i></span></span>
+                                        <span *ngIf="row.ddd === 'Not Identified'" class="ng-danger round-tabs"><span style="color:black;"><i class="fas fa-exclamation font-size:x-large"><br><span style="font-size:smaller;">DDD</span></i></span></span>
+                                        <span *ngIf="row.ddd === 'Not Started'" class="ng-danger round-tabs"><span style="color:black;"><i class="fas fa-question font-size:x-large"><br><span style="font-size:smaller;">DDD</span></i></span></span>
+                                        <span *ngIf="row.ddd === 'In Process'" class="ng-info round-tabs"><span style="color:black;"><i class="fas fa-play-circle font-size:x-large"><br><span style="font-size:smaller;">DDD</span></i></span></span>
+                                        <span *ngIf="row.ddd === 'Schedule Pending'" class="ng-warning round-tabs"><span style="color:black;"><i class="far fa-calendar-minus font-size:x-large"><br><span style="font-size:smaller;">DDD</span></i></span></span>
+                                        <span *ngIf="row.ddd === 'Scheduled'" class="ng-info round-tabs"><span style="color:black;"><i class="far fa-calendar-check font-size:x-large"><br><span style="font-size:smaller;">DDD</span></i></span></span>
+                                        <span *ngIf="row.ddd === 'Agreement w/ FEMA'" class="ng-info round-tabs"><span style="color:black;"><i class="fas fa-thumbs-up font-size:x-large"><br><span style="font-size:smaller;">DDD</span></i></span></span>
+                                        <span *ngIf="row.ddd === 'Disagreement w/ FEMA'" class="ng-danger round-tabs"><span style="color:black;"><i class="fas fa-thumbs-down font-size:x-large"><br><span style="font-size:smaller;">DDD</span></i></span></span>
+                                        <span *ngIf="row.ddd === 'Pending Validation'" class="ng-warning round-tabs"><span style="color:black;"><i class="fas fa-pause font-size:x-large"><br><span style="font-size:smaller;">DDD</span></i></span></span>
+                                        <span *ngIf="row.ddd === 'Signed Engineer Report'" class="ng-info round-tabs"><span style="color:black;"><i class="fas fa-certificate font-size:x-large"><br><span style="font-size:smaller;">DDD</span></i></span></span>
+                                        <span *ngIf="row.ddd === 'Completed'" class="ng-success round-tabs"><span style="color:black;"><i class="fas fa-check font-size:x-large"><br><span style="font-size:smaller;">DDD</span></i></span></span>
+                                        <span *ngIf="row.ddd === 'Obligated'" class="ng-success round-tabs"><span style="color:black;"><i class="fas fa-dollar-sign font-size:x-large"><br><span style="font-size:smaller;">DDD</span></i></span></span>
+                                      </li>
+                                      <li class="flex-fill">
+                                        <span *ngIf="row.sow !== 'N/A' && row.sow !== 'Not Identified' && row.sow !== 'Not Started' && row.sow !== 'In Process' && 
+                                                     row.sow !== 'Schedule Pending' && row.sow !== 'Scheduled' && row.sow !== 'Agreement w/ FEMA' && 
+                                                     row.sow !== 'Disagreement w/ FEMA' && row.sow !== 'Pending Validation' && row.sow !== 'Signed Engineer Report' && 
+                                                     row.sow !== 'Completed' && row.sow !== 'Obligated'" class="ng-dark round-tabs"><span style="color:black;"><i class="fas fa-question font-size:x-large"><br><span style="font-size:smaller;">SOW</span></i></span></span>
+                                        <span *ngIf="row.sow === 'N/A'" class="ng-secondary round-tabs"><span style="color:black;"><i class="fas fa-minus-circle font-size:x-large"><br><span style="font-size:smaller;">SOW</span></i></span></span>
+                                        <span *ngIf="row.sow === 'Not Identified'" class="ng-danger round-tabs"><span style="color:black;"><i class="fas fa-exclamation font-size:x-large"><br><span style="font-size:smaller;">SOW</span></i></span></span>
+                                        <span *ngIf="row.sow === 'Not Started'" class="ng-danger round-tabs"><span style="color:black;"><i class="fas fa-question font-size:x-large"><br><span style="font-size:smaller;">SOW</span></i></span></span>
+                                        <span *ngIf="row.sow === 'In Process'" class="ng-info round-tabs"><span style="color:black;"><i class="fas fa-play-circle font-size:x-large"><br><span style="font-size:smaller;">SOW</span></i></span></span>
+                                        <span *ngIf="row.sow === 'Schedule Pending'" class="ng-warning round-tabs"><span style="color:black;"><i class="far fa-calendar-minus font-size:x-large"><br><span style="font-size:smaller;">SOW</span></i></span></span>
+                                        <span *ngIf="row.sow === 'Scheduled'" class="ng-info round-tabs"><span style="color:black;"><i class="far fa-calendar-check font-size:x-large"><br><span style="font-size:smaller;">SOW</span></i></span></span>
+                                        <span *ngIf="row.sow === 'Agreement w/ FEMA'" class="ng-info round-tabs"><span style="color:black;"><i class="fas fa-thumbs-up font-size:x-large"><br><span style="font-size:smaller;">SOW</span></i></span></span>
+                                        <span *ngIf="row.sow === 'Disagreement w/ FEMA'" class="ng-danger round-tabs"><span style="color:black;"><i class="fas fa-thumbs-down font-size:x-large"><br><span style="font-size:smaller;">SOW</span></i></span></span>
+                                        <span *ngIf="row.sow === 'Pending Validation'" class="ng-warning round-tabs"><span style="color:black;"><i class="fas fa-pause font-size:x-large"><br><span style="font-size:smaller;">SOW</span></i></span></span>
+                                        <span *ngIf="row.sow === 'Signed Engineer Report'" class="ng-info round-tabs"><span style="color:black;"><i class="fas fa-certificate font-size:x-large"><br><span style="font-size:smaller;">SOW</span></i></span></span>
+                                        <span *ngIf="row.sow === 'Completed'" class="ng-success round-tabs"><span style="color:black;"><i class="fas fa-check font-size:x-large"><br><span style="font-size:smaller;">SOW</span></i></span></span>
+                                        <span *ngIf="row.sow === 'Obligated'" class="ng-success round-tabs"><span style="color:black;"><i class="fas fa-dollar-sign font-size:x-large"><br><span style="font-size:smaller;">SOW</span></i></span></span>
+                                      </li> 
+                                      <li class="flex-fill">
+                                        <span *ngIf="row.mit_406_plan !== 'N/A' && row.mit_406_plan !== 'Not Identified' && row.mit_406_plan !== 'Not Started' && row.mit_406_plan !== 'In Process' && 
+                                                     row.mit_406_plan !== 'Schedule Pending' && row.mit_406_plan !== 'Scheduled' && row.mit_406_plan !== 'Agreement w/ FEMA' && 
+                                                     row.mit_406_plan !== 'Disagreement w/ FEMA' && row.mit_406_plan !== 'Pending Validation' && row.mit_406_plan !== 'Signed Engineer Report' && 
+                                                     row.mit_406_plan !== 'Completed' && row.mit_406_plan !== 'Obligated'" class="ng-dark round-tabs"><span style="color:black;"><i class="fas fa-question font-size:x-large"><br><span style="font-size:smaller;">MIT</span></i></span></span>
+                                        <span *ngIf="row.mit_406_plan === 'N/A'" class="ng-secondary round-tabs"><span style="color:black;"><i class="fas fa-minus-circle font-size:x-large"><br><span style="font-size:smaller;">MIT</span></i></span></span>
+                                        <span *ngIf="row.mit_406_plan === 'Not Identified'" class="ng-danger round-tabs"><span style="color:black;"><i class="fas fa-exclamation font-size:x-large"><br><span style="font-size:smaller;">MIT</span></i></span></span>
+                                        <span *ngIf="row.mit_406_plan === 'Not Started'" class="ng-danger round-tabs"><span style="color:black;"><i class="fas fa-question font-size:x-large"><br><span style="font-size:smaller;">MIT</span></i></span></span>
+                                        <span *ngIf="row.mit_406_plan === 'In Process'" class="ng-info round-tabs"><span style="color:black;"><i class="fas fa-play-circle font-size:x-large"><br><span style="font-size:smaller;">MIT</span></i></span></span>
+                                        <span *ngIf="row.mit_406_plan === 'Schedule Pending'" class="ng-warning round-tabs"><span style="color:black;"><i class="far fa-calendar-minus font-size:x-large"><br><span style="font-size:smaller;">MIT</span></i></span></span>
+                                        <span *ngIf="row.mit_406_plan === 'Scheduled'" class="ng-info round-tabs"><span style="color:black;"><i class="far fa-calendar-check font-size:x-large"><br><span style="font-size:smaller;">MIT</span></i></span></span>
+                                        <span *ngIf="row.mit_406_plan === 'Agreement w/ FEMA'" class="ng-info round-tabs"><span style="color:black;"><i class="fas fa-thumbs-up font-size:x-large"><br><span style="font-size:smaller;">MIT</span></i></span></span>
+                                        <span *ngIf="row.mit_406_plan === 'Disagreement w/ FEMA'" class="ng-danger round-tabs"><span style="color:black;"><i class="fas fa-thumbs-down font-size:x-large"><br><span style="font-size:smaller;">MIT</span></i></span></span>
+                                        <span *ngIf="row.mit_406_plan === 'Pending Validation'" class="ng-warning round-tabs"><span style="color:black;"><i class="fas fa-pause font-size:x-large"><br><span style="font-size:smaller;">MIT</span></i></span></span>
+                                        <span *ngIf="row.mit_406_plan === 'Signed Engineer Report'" class="ng-info round-tabs"><span style="color:black;"><i class="fas fa-certificate font-size:x-large"><br><span style="font-size:smaller;">MIT</span></i></span></span>
+                                        <span *ngIf="row.mit_406_plan === 'Completed'" class="ng-success round-tabs"><span style="color:black;"><i class="fas fa-check font-size:x-large"><br><span style="font-size:smaller;">MIT</span></i></span></span>
+                                        <span *ngIf="row.mit_406_plan === 'Obligated'" class="ng-success round-tabs"><span style="color:black;"><i class="fas fa-dollar-sign font-size:x-large"><br><span style="font-size:smaller;">MIT</span></i></span></span>
+                                      </li>
+                                      <li class="flex-fill">
+                                        <span *ngIf="row.cef !== 'N/A' && row.cef !== 'Not Identified' && row.cef !== 'Not Started' && row.cef !== 'In Process' && 
+                                                     row.cef !== 'Schedule Pending' && row.cef !== 'Scheduled' && row.cef !== 'Agreement w/ FEMA' && 
+                                                     row.cef !== 'Disagreement w/ FEMA' && row.cef !== 'Pending Validation' && row.cef !== 'Signed Engineer Report' && 
+                                                     row.cef !== 'Completed' && row.cef !== 'Obligated'" class="ng-dark round-tabs"><span style="color:black;"><i class="fas fa-question font-size:x-large"><br><span style="font-size:smaller;">CEF</span></i></span></span>
+                                        <span *ngIf="row.cef === 'N/A'" class="ng-secondary round-tabs"><span style="color:black;"><i class="fas fa-minus-circle font-size:x-large"><br><span style="font-size:smaller;">CEF</span></i></span></span>
+                                        <span *ngIf="row.cef === 'Not Identified'" class="ng-danger round-tabs"><span style="color:black;"><i class="fas fa-exclamation font-size:x-large"><br><span style="font-size:smaller;">CEF</span></i></span></span>
+                                        <span *ngIf="row.cef === 'Not Started'" class="ng-danger round-tabs"><span style="color:black;"><i class="fas fa-question font-size:x-large"><br><span style="font-size:smaller;">CEF</span></i></span></span>
+                                        <span *ngIf="row.cef === 'In Process'" class="ng-info round-tabs"><span style="color:black;"><i class="fas fa-play-circle font-size:x-large"><br><span style="font-size:smaller;">CEF</span></i></span></span>
+                                        <span *ngIf="row.cef === 'Schedule Pending'" class="ng-warning round-tabs"><span style="color:black;"><i class="far fa-calendar-minus font-size:x-large"><br><span style="font-size:smaller;">CEF</span></i></span></span>
+                                        <span *ngIf="row.cef === 'Scheduled'" class="ng-info round-tabs"><span style="color:black;"><i class="far fa-calendar-check font-size:x-large"><br><span style="font-size:smaller;">CEF</span></i></span></span>
+                                        <span *ngIf="row.cef === 'Agreement w/ FEMA'" class="ng-info round-tabs"><span style="color:black;"><i class="fas fa-thumbs-up font-size:x-large"><br><span style="font-size:smaller;">CEF</span></i></span></span>
+                                        <span *ngIf="row.cef === 'Disagreement w/ FEMA'" class="ng-danger round-tabs"><span style="color:black;"><i class="fas fa-thumbs-down font-size:x-large"><br><span style="font-size:smaller;">CEF</span></i></span></span>
+                                        <span *ngIf="row.cef === 'Pending Validation'" class="ng-warning round-tabs"><span style="color:black;"><i class="fas fa-pause font-size:x-large"><br><span style="font-size:smaller;">CEF</span></i></span></span>
+                                        <span *ngIf="row.cef === 'Signed Engineer Report'" class="ng-info round-tabs"><span style="color:black;"><i class="fas fa-certificate font-size:x-large"><br><span style="font-size:smaller;">CEF</span></i></span></span>
+                                        <span *ngIf="row.cef === 'Completed'" class="ng-success round-tabs"><span style="color:black;"><i class="fas fa-check font-size:x-large"><br><span style="font-size:smaller;">CEF</span></i></span></span>
+                                        <span *ngIf="row.cef === 'Obligated'" class="ng-success round-tabs"><span style="color:black;"><i class="fas fa-dollar-sign font-size:x-large"><br><span style="font-size:smaller;">CEF</span></i></span></span>
+                                      </li>
+                                      <li class="flex-fill">
+                                        <span *ngIf="row.crc !== 'N/A' && row.crc !== 'Not Identified' && row.crc !== 'Not Started' && row.crc !== 'In Process' && 
+                                                     row.crc !== 'Schedule Pending' && row.crc !== 'Scheduled' && row.crc !== 'Agreement w/ FEMA' && 
+                                                     row.crc !== 'Disagreement w/ FEMA' && row.crc !== 'Pending Validation' && row.crc !== 'Signed Engineer Report' && 
+                                                     row.crc !== 'Completed' && row.crc !== 'Obligated'" class="ng-dark round-tabs"><span style="color:black;"><i class="fas fa-question font-size:x-large"><br><span style="font-size:smaller;">CRC</span></i></span></span>
+                                        <span *ngIf="row.crc === 'N/A'" class="ng-secondary round-tabs"><span style="color:black;"><i class="fas fa-minus-circle font-size:x-large"><br><span style="font-size:smaller;">CRC</span></i></span></span>
+                                        <span *ngIf="row.crc === 'Not Identified'" class="ng-danger round-tabs"><span style="color:black;"><i class="fas fa-exclamation font-size:x-large"><br><span style="font-size:smaller;">CRC</span></i></span></span>
+                                        <span *ngIf="row.crc === 'Not Started'" class="ng-danger round-tabs"><span style="color:black;"><i class="fas fa-question font-size:x-large"><br><span style="font-size:smaller;">CRC</span></i></span></span>
+                                        <span *ngIf="row.crc === 'In Process'" class="ng-info round-tabs"><span style="color:black;"><i class="fas fa-play-circle font-size:x-large"><br><span style="font-size:smaller;">CRC</span></i></span></span>
+                                        <span *ngIf="row.crc === 'Schedule Pending'" class="ng-warning round-tabs"><span style="color:black;"><i class="far fa-calendar-minus font-size:x-large"><br><span style="font-size:smaller;">CRC</span></i></span></span>
+                                        <span *ngIf="row.crc === 'Scheduled'" class="ng-info round-tabs"><span style="color:black;"><i class="far fa-calendar-check font-size:x-large"><br><span style="font-size:smaller;">CRC</span></i></span></span>
+                                        <span *ngIf="row.crc === 'Agreement w/ FEMA'" class="ng-info round-tabs"><span style="color:black;"><i class="fas fa-thumbs-up font-size:x-large"><br><span style="font-size:smaller;">CRC</span></i></span></span>
+                                        <span *ngIf="row.crc === 'Disagreement w/ FEMA'" class="ng-danger round-tabs"><span style="color:black;"><i class="fas fa-thumbs-down font-size:x-large"><br><span style="font-size:smaller;">CRC</span></i></span></span>
+                                        <span *ngIf="row.crc === 'Pending Validation'" class="ng-warning round-tabs"><span style="color:black;"><i class="fas fa-pause font-size:x-large"><br><span style="font-size:smaller;">CRC</span></i></span></span>
+                                        <span *ngIf="row.crc === 'Signed Engineer Report'" class="ng-info round-tabs"><span style="color:black;"><i class="fas fa-certificate font-size:x-large"><br><span style="font-size:smaller;">CRC</span></i></span></span>
+                                        <span *ngIf="row.crc === 'Completed'" class="ng-success round-tabs"><span style="color:black;"><i class="fas fa-check font-size:x-large"><br><span style="font-size:smaller;">CRC</span></i></span></span>
+                                        <span *ngIf="row.crc === 'Obligated'" class="ng-success round-tabs"><span style="color:black;"><i class="fas fa-dollar-sign font-size:x-large"><br><span style="font-size:smaller;">CRC</span></i></span></span>
+                                        <!-- <span class="ng-red round-tabs">
+                                          <span style="color:black;"><i class="fas fa-exclamation font-size:x-large"><br><span style="font-size:smaller;">CRC</span></i></span>
+                                        </span> -->
+                                      </li>
+                                  </ul>
+                                </div>
+                              </div>
+                          </div>
+                      </div>        
+                    </section>
+                  </div>
+                </div>
+                
+                <div style="padding-left:35px;">
+                  <div class="row">
+                    <div class="col-md-2">
+                        <h6><strong>Large / Small: </strong></h6>
+                    </div>
+                    <div class="col-md-2">
+                        <small><div>{{ row.large_or_small }}</div></small>
+                    </div>
+                    <div class="col-md-2">
+                      <h6><strong>Replacement Facility: </strong></h6>
+                    </div>
+                    <div class="col-md-2">
+                      <small><div>{{ row.replacement_facility }}</div></small>
+                    </div>
+                    <div class="col-md-2">
+                      <h6><strong>Estimated Cost: </strong></h6>
+                    </div>
+                    <div class="col-md-2">
+                      <small><div>{{ row.estimated_cost }}</div></small>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <h6><strong>Small Proj Merge?: </strong></h6>
+                    </div>
+                    <div class="col-md-2">
+                      <small><div>{{ row.small_proj_merge }}</div></small>
+                    </div>
+                    <div class="col-md-2">
+                      <h6><strong>EMMIE #: </strong></h6>
+                    </div>
+                    <div class="col-md-2">
+                      <small><div>{{ row.emmie_no }}</div></small>
+                    </div>
+                    <div class="col-md-2">
+                      <h6><strong>Project Lead: </strong></h6>
+                    </div>
+                    <div class="col-md-2">
+                      <small><div>{{ row.project_lead }}</div></small>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <h6><strong>Standard Lane: </strong></h6>
+                    </div>
+                    <div class="col-md-2">
+                      <small><div>{{ row.standard_lane }}</div></small>
+                    </div>
+                    <div class="col-md-2">
+                      <h6><strong>428?: </strong></h6>
+                    </div>
+                    <div class="col-md-2">
+                      <small><div>{{ row.for_428 }}</div></small>
+                    </div>
+                    <div class="col-md-2">
+                      <h6><strong>428-BBA?: </strong></h6>
+                    </div>
+                    <div class="col-md-2">
+                      <small><div>{{ row.for_428_bba }}</div></small>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <h6><strong>Temp Facilities?: </strong></h6>
+                    </div>
+                    <div class="col-md-2">
+                      <small><div>{{ row.temp_facilities }}</div></small>
+                    </div>
+                    <div class="col-md-2">
+                      <h6><strong>Road Watershed?: </strong></h6>
+                    </div>
+                    <div class="col-md-2">
+                      <small><div>{{ row.road_watershed }}</div></small>
+                    </div>
+                    <div class="col-md-2">
+                      <h6><strong>Improved Project?: </strong></h6>
+                    </div>
+                    <div class="col-md-2">
+                      <small><div>{{ row.improved_project }}</div></small>
+                    </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-12">
+                        <hr>
+                        <h6>Standard Lane or 428</h6>				
+                      </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-2">
+                      <h6><strong>SI: </strong></h6>
+                    </div>
+                    <div class="col-md-2">
+                      <small><div>{{ row.si }}</div></small>
+                    </div>
+                    <div class="col-md-1">
+                      <h6><strong>DDD: </strong></h6>
+                    </div>
+                    <div class="col-md-2">
+                      <small><div>{{ row.ddd }}</div></small>
+                    </div>
+                    <div class="col-md-1">
+                      <h6><strong>SOW: </strong></h6>
+                    </div>
+                    <div class="col-md-2">
+                      <small><div>{{ row.sow }}</div></small>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-2">
+                      <h6><strong>406 MIT Plan: </strong></h6>
+                    </div>
+                    <div class="col-md-2">
+                      <small><div>{{ row.mit_406_plan }}</div></small>
+                    </div>
+                    <div class="col-md-1">
+                      <h6><strong>CEF: </strong></h6>
+                    </div>
+                    <div class="col-md-2">
+                      <small><div>{{ row.cef }}</div></small>
+                    </div>
+                    <div class="col-md-1">
+                      <h6><strong>CRC: </strong></h6>
+                    </div>
+                    <div class="col-md-2">
+                      <small><div>{{ row.crc }}</div></small>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <hr>
+                      <h6>428-BBA</h6>				
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-2">
+                      <h6><strong>SI: </strong></h6>
+                    </div>
+                    <div class="col-md-2">
+                      <small><div>{{ row.bba_si }}</div></small>
+                    </div>
+                    <div class="col-md-1">
+                      <h6><strong>DDD: </strong></h6>
+                    </div>
+                    <div class="col-md-2">
+                      <small><div>{{ row.bba_ddd }}</div></small>
+                    </div>
+                    <div class="col-md-1">
+                      <h6><strong>SOW: </strong></h6>
+                    </div>
+                    <div class="col-md-2">
+                      <small><div>{{ row.bba_sow }}</div></small>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-2">
+                      <h6><strong>406 MIT Plan: </strong></h6>
+                    </div>
+                    <div class="col-md-2">
+                      <small><div>{{ row.bba_mit_406_plan }}</div></small>
+                    </div>
+                    <div class="col-md-1">
+                      <h6><strong>CEF: </strong></h6>
+                    </div>
+                    <div class="col-md-2">
+                      <small><div>{{ row.bba_cef }}</div></small>
+                    </div>
+                    <div class="col-md-1">
+                      <h6><strong>CRC: </strong></h6>
+                    </div>
+                    <div class="col-md-2">
+                      <small><div>{{ row.bba_crc }}</div></small>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <hr>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <h6><strong>Issues Holding Up Project Completion: </strong></h6>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-9">
+                      <small>{{ row.issues }}</small>
+                    </div>
+                    <div class="col-md-9">
+
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <hr>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h6><strong>Follow Up Remarks: </strong></h6>
+                    </div>
+                    <div class="col-md-12">
+                      <small><div style="flex-wrap: nowrap; -ms-flex-wrap: wrap;">{{ row.follow_up_remarks }}</div></small>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </ngx-datatable-row-detail>
+
+            <!-- Column Templates -->
+            <ngx-datatable-column
+              [width]="20"
+              [resizeable]="true"
+              [sortable]="true"
+              [draggable]="false"
+              [canAutoResize]="true"
+            >
+              <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                <a
+                  href="javascript:void(0)"
+                  [class.datatable-icon-right]="!expanded"
+                  [class.datatable-icon-down]="expanded"
+                  title="Expand/Collapse Row"
+                  (click)="toggleExpandRow(row)"
+                >
+                </a>
+              </ng-template>
+            </ngx-datatable-column>
+            
+            <ngx-datatable-column name="ID" width="20"></ngx-datatable-column>
+            <ngx-datatable-column name="Sector" width="20"></ngx-datatable-column>
+            <ngx-datatable-column name="Island" width="20"></ngx-datatable-column>
+            <ngx-datatable-column name="DR" ></ngx-datatable-column>
+            <ngx-datatable-column name="Applicant"></ngx-datatable-column>
+            <ngx-datatable-column name="GM No" >
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{ row.gm_no }}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Category" ></ngx-datatable-column>
+            <ngx-datatable-column name="Progress Indicator" >
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <img *ngIf="row.progress_indicator === 'Making Progress'" src="assets/images/icon/making_progress.gif" />
+                <img *ngIf="row.progress_indicator === 'Stuck'" src="assets/images/icon/stuck.gif" />
+                <img *ngIf="row.progress_indicator === 'Significant Problems'" src="assets/images/icon/significant_problems.gif" />
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Quadrant" >
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <span *ngIf="row.quadrant === 'LCL$'" style="background-color: green;">LCL$</span>
+                <span *ngIf="row.quadrant === 'HCL$'" style="background-color: yellow;">HCL$</span>
+                <span *ngIf="row.quadrant === 'LCH$'" style="background-color: yellow;">LCH$</span>
+                <span *ngIf="row.quadrant === 'HCH$'" style="background-color: red;">HCH$</span>
+              </ng-template>
+            </ngx-datatable-column>
+          </ngx-datatable>
         </div>
+      </div>
     </div>
 </div>

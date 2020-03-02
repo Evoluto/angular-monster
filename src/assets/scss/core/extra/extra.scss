@@ -653,7 +653,7 @@ Ngx wizard pages scss
 
 .wizard-navbar {
   padding: 0px;
-  margin: 50px 0 50px 0;
+  margin: 20px 0 50px 0;
   display: flex;
   position: relative;
   align-items: center;
@@ -677,7 +677,7 @@ Ngx wizard pages scss
     text-align: center;
 
     .round-tabs {
-      padding: 20px;
+      padding: 30px 20px 20px 20px;
       background: white;
       position: relative;
       z-index: 2;
@@ -706,6 +706,40 @@ Ngx wizard pages scss
 #ngx .ng-valid,
 .ng-touched.ng-valid {
   border-color: $success;
+}
+
+
+
+
+#ngx .ng-dark,
+.ng-touched.ng-dark {
+  border-color: darkslategray;
+  background: darkslategray;
+}
+#ngx .ng-secondary,
+.ng-touched.ng-secondary {
+  border-color: $secondary;
+  background: $secondary;
+}
+#ngx .ng-danger,
+.ng-touched.ng-danger {
+  border-color: $danger;
+  background: $danger;
+}
+#ngx .ng-info,
+.ng-touched.ng-info {
+  border-color: $info;
+  background: $info;
+}
+#ngx .ng-warning,
+.ng-touched.ng-warning {
+  border-color: $warning;
+  background: $warning;
+}
+#ngx .ng-success,
+.ng-touched.ng-success {
+  border-color: $success;
+  background: $success;
 }
 
 
