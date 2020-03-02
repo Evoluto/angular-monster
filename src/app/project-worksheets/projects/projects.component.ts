@@ -84,8 +84,8 @@ export class ProjectsComponent implements OnInit {
     this.rows = data2;
 
     // LOAD FILTERS
-    this.reportService.getDropdownValues("7599").subscribe(response => this.loadSectors(response));
-    this.reportService.getDropdownValues("7602").subscribe(response => this.loadApplicants(response));
+    this.reportService.getDropdownValues("7686").subscribe(response => this.loadSectors(response));
+    this.reportService.getDropdownValues("7692").subscribe(response => this.loadApplicants(response));
     this.reportService.getDropdownValues("7601").subscribe(response => this.loadDisasters(response));
     this.reportService.getDropdownValues("7603").subscribe(response => this.loadCategories(response));
     this.spinner.stop();
@@ -146,7 +146,7 @@ export class ProjectsComponent implements OnInit {
   apply_filters(): void {
     //alert(this.selectedSector + " " + this.selectedApplicant + " " + this.selectedCategory + " " + this.selectedDisaster);
     this.rows = [];
-    var condition = `{"ReportId": 729,"ConditionGroups": [{"Type": "all","Conditions": [`;
+    var condition = `{"ReportId": 732,"ConditionGroups": [{"Type": "all","Conditions": [`;
           
     if ((this.selectedSector != "All Sectors" && this.selectedSector != "") || 
         (this.selectedApplicant != "All Applicants" && this.selectedApplicant != "") || 
@@ -155,12 +155,12 @@ export class ProjectsComponent implements OnInit {
           if (this.selectedSector != "All Sectors" && this.selectedSector != "") {
             if (condition[condition.length-1] != '[')
               condition += ","
-            condition += `{'ConditionField': {'Id': 7599 },'OperationType': 'is equal','Value': '` + this.selectedSector + `'}`;
+            condition += `{'ConditionField': {'Id': 7686 },'OperationType': 'is equal','Value': '` + this.selectedSector + `'}`;
           }
           if (this.selectedApplicant != "All Applicants" && this.selectedApplicant != "") {
             if (condition[condition.length-1] != '[')
               condition += ","
-            condition += `{'ConditionField': {'Id': 7602 },'OperationType': 'is equal','Value': '` + this.selectedApplicant + `'}`;
+            condition += `{'ConditionField': {'Id': 7692 },'OperationType': 'is equal','Value': '` + this.selectedApplicant + `'}`;
           }
           if (this.selectedDisaster != "All Disasters" && this.selectedDisaster != "") {
             if (condition[condition.length-1] != '[')

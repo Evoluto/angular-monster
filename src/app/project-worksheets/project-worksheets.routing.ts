@@ -12,7 +12,7 @@ export const ProjectWorksheetsRoutes: Routes = [
         component: ProjectsComponent,
         data: {
           title: 'Projects',
-          reportId: 731,
+          reportId: 732,
           urls: [
             { title: 'Projects', url: '/projects' },
             { title: 'Projects' }
